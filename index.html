@@ -4,8 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+      body {
+        background-color: black;
+        display: flex;
+        min-height: 100vh;
+       align-items: center;
+        /* align-content: ; */
+        justify-content: center;
+        flex-direction: column;
+   
+      }
+      .container {
+        width: 350px;
+        height: 240px;
+         display: flex;
+         border-radius: 10px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        border: 2px solid yellowgreen;
+      /* align-content: flex-end; */
+      background:linear-gradient(30deg,);
+      margin: 15px;
+      }
+      .timer{
+        color: white;
+         display: flex;
+            /* flex-direction: column; */
+            align-items: center;
+            justify-content: space-evenly;
+       width: 90%;
+       height: 100px; 
+       font-size: 70px;
+       font-family: Arial, Helvetica, sans-serif;
+        /* background-color: aquamarine; */
+      }
+      .btns{
+        display: flex;
+        /* background-color: rgb(249, 97, 97); */
+
+      }
+      button{
+          color:  white;
+          border: none;
+          width: 50px;
+          margin-left: 20px;
+          padding: 3px 5px;
+          border-radius: 30px;
+          background-color: black;
+          /* background: linear-gradient(90deg,#ff7eb3,#ff758c); */
+          /* background-color: rgb(167, 211, 9); */
+        /* transition:  0.4s linear background ; */
+
+      }
+      button:hover{
+         background: linear-gradient(90deg,#ff7eb3,#ff758c);
+        transition:   all linear 5s; 
+      }
+      h1{
+        /* background-color: #ff758c; */
+        position: relative;
+
+        text-align: center;
+        color:white;
+        animation: change infinite linear ;
+      }
+      @keyframes change{
+        from {
+       background-color:linear-gradient(90deg,#ff7eb3,#ff758c)
+        }
+        to{
+            background :linear-gradient(9deg,#ff7eb3,#ff758c)
+        }
+      }
+
+    </style>
 </head>
 <body>
-      <h1>coder army </h1>
+    <div class="container">
+        <h1>Stop Watch</h1>
+        <div class="timer">
+        <div class="hour">00</div>:
+        <div class="minute">00</div>:
+        <div class="sec">00</div>
+        </div>
+        <div class="btns">
+            <button id="start">Start</button>
+            <button id="stop">Stop</button>
+            <button  id="reset">Reset</button>
+        </div>
+    </div>
+   <script>
+    let date=new Date();
+    let hour=document.querySelector(".hour");
+    
+    let min=document.querySelector(".minute");
+    let sec=document.querySelector(".sec");
+    let start=document.getElementById("start");
+    let reset=document.getElementById("reset");
+    let stop=document.getElementById("stop");
+    let count=0;
+    let timer;
+     function start1(){
+            timer=setInterval(()=>{
+                count+=1;
+
+          sec.innerHTML=String(count%60).padStart(2,"0");
+          let tmin=Math.floor((count/60)%60);
+          hour.textContent=String(Math.floor(count/(60*60))%12).padStart(2,"0");
+         let s=String(tmin).padStart(2,"0")
+     
+        min.textContent=s;
+
+            },1000)
+
+        }
+        function stop1 () {
+            clearInterval(timer);
+            start=1;
+        }
+        function reset1() {
+            clearInterval(timer);
+            count=0;
+             sec.innerHTML="00";
+          min.innerHTML="00";
+          start=1
+            
+        }
+        reset.addEventListener("click",reset1)
+    
+      start.addEventListener("click",start1);
+       stop.addEventListener("click",stop1);
+   </script>
 </body>
 </html>
